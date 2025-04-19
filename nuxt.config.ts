@@ -25,6 +25,9 @@ export default defineNuxtConfig({
   // Vite 配置
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      sourcemap: true, // 启用 sourcemap
+    },
   },
   // ESLint 配置
   eslint: {
