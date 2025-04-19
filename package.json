@@ -11,7 +11,8 @@
     "postinstall": "nuxt prepare",
     "lint": "tsx scripts/lint.ts",
     "lint:fix": "tsx scripts/lint.ts --fix",
-    "clear": "tsx scripts/clear.ts"
+    "clear": "tsx scripts/clear.ts",
+    "icons:get": "tsx scripts/getHugeIcons.ts"
   },
   "dependencies": {
     "@nuxt/icon": "1.12.0",

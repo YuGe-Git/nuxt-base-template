@@ -8,7 +8,7 @@
       <!-- 标题区域 -->
       <div class="text-center mb-12">
         <h1 class="text-4xl font-bold mb-3 text-base-content">
-          <Icon name="hugeicons:align-box-top-right" /> Nuxt-Base-Template
+          <Icon name="hugeicons:align-right" /> Nuxt-Base-Template
         </h1>
         <div class="divider w-24 mx-auto my-4 opacity-30" />
         <p class="text-lg opacity-70 max-w-xl mx-auto">
@@ -140,7 +140,7 @@
       </div>
 
       <!-- 行动按钮区域 -->
-      <div class="flex justify-center gap-4 mt-8">
+      <div class="flex justify-center gap-4 mt-8 flex-wrap">
         <button class="btn btn-neutral btn-lg gap-2">
           <span class="i-heroicons-document-text" />
           查看文档
@@ -149,6 +149,10 @@
           <span class="i-heroicons-code-bracket" />
           GitHub
         </button>
+        <NuxtLink to="/test/nuxt/icon" class="btn btn-accent btn-lg gap-2">
+          <Icon name="hugeicons:gallery" />
+          图标测试页面
+        </NuxtLink>
       </div>
     </div>
   </div>
