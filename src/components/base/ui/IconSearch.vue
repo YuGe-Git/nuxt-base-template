@@ -37,3 +37,6 @@ function clearSearch() {
     </div>
   </div>
 </template>
+
+<style scoped>
+</style>

@@ -149,9 +149,9 @@
           <span class="i-heroicons-code-bracket" />
           GitHub
         </button>
-        <NuxtLink to="/test/nuxt/icon" class="btn btn-accent btn-lg gap-2">
-          <Icon name="hugeicons:gallery" />
-          图标测试页面
+        <NuxtLink to="/test" class="btn btn-accent btn-lg gap-2">
+          <Icon name="hugeicons:image-01" />
+          测试页面
         </NuxtLink>
       </div>
     </div>

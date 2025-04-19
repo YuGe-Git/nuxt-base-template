@@ -48,10 +48,7 @@ function nextPage() {
     <div class="container mx-auto">
       <!-- 导航返回 -->
       <div class="mb-4">
-        <NuxtLink to="/" class="btn btn-outline btn-sm gap-2">
-          <Icon name="hugeicons:arrow-left-01" />
-          返回首页
-        </NuxtLink>
+        <BaseUiBackToTestCenter />
       </div>
 
       <!-- 标题 -->
