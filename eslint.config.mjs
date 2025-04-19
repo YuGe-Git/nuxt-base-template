@@ -10,7 +10,29 @@ export default antfu({
   // 自定义规则
   rules: {
     'vue/multi-word-component-names': ['error', {
-      ignores: ['Index', 'Layout', 'Error', 'test'],
+      ignores: [
+        'Index',
+        'Layout',
+        'Error',
+        'test',
+        // 允许的单词组件名
+        'Cards',
+        'Buttons',
+        'Forms',
+        'Alerts',
+        'Modals',
+        'CardsTest',
+        'ButtonsTest',
+        'FormsTest',
+        'AlertsTest',
+        'ModalsTest',
+        'Card',
+        'Button',
+        'Form',
+        'Alert',
+        'Modal',
+        'ThemeSwitcher',
+      ],
     }],
 
     // 变量命名规则
