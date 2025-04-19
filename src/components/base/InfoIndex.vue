@@ -1,10 +1,14 @@
+<script setup>
+// 无需额外脚本
+</script>
+
 <template>
   <div class="min-h-screen bg-base-100">
     <div class="container mx-auto px-4 py-10">
       <!-- 标题区域 -->
       <div class="text-center mb-12">
         <h1 class="text-4xl font-bold mb-3 text-base-content">
-          Nuxt-Base-Template
+          <Icon name="hugeicons:align-box-top-right" /> Nuxt-Base-Template
         </h1>
         <div class="divider w-24 mx-auto my-4 opacity-30" />
         <p class="text-lg opacity-70 max-w-xl mx-auto">
@@ -149,10 +153,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-// 无需额外脚本
-</script>
 
 <style scoped>
 </style>

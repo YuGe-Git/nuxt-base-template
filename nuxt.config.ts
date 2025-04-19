@@ -36,5 +36,8 @@ export default defineNuxtConfig({
   icon: {
     mode: 'css',
     cssLayer: 'base',
+    serverBundle: {
+      collections: ['Hugeicons'],
+    },
   },
 })
