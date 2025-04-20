@@ -12,6 +12,12 @@
       <HomeQuickStart />
       <HomeStructure />
       <HomeFooter />
+
+      <!-- 页面状态信息 -->
+      <PageStatus
+        page-path="/"
+        last-edited="2025-04-20 15:21"
+      />
     </div>
   </div>
 </template>

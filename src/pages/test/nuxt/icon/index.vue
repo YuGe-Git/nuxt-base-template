@@ -227,6 +227,12 @@ if (typeof window !== 'undefined') {
             适用于 Nuxt 3 的图标展示
           </p>
         </div>
+
+        <!-- 页面状态 -->
+        <PageStatus
+          page-path="/test/nuxt/icon"
+          last-edited="2025-04-20 20:46:00"
+        />
       </div>
     </FadeInContent>
   </div>

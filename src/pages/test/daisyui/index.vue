@@ -102,6 +102,12 @@ onMounted(() => {
               适用于 Nuxt 3 的组件展示
             </p>
           </div>
+
+          <!-- 页面状态 -->
+          <PageStatus
+            page-path="/test/daisyui"
+            last-edited="2025-04-20 21:11:00"
+          />
         </div>
       </div>
     </FadeInContent>

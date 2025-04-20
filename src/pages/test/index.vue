@@ -120,6 +120,12 @@ function clearHoveredCard() {
           <div class="text-center mt-16 opacity-70 text-sm">
             <p>测试中心 · Nuxt Base Template</p>
           </div>
+
+          <!-- 页面状态 -->
+          <PageStatus
+            page-path="/test"
+            last-edited="2025-04-20 21:05:00"
+          />
         </div>
       </div>
     </FadeInContent>
