@@ -8,7 +8,7 @@ defineProps({
   },
   gridCols: {
     type: String,
-    default: 'grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8',
+    default: 'grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10',
   },
   iconSize: {
     type: String,
@@ -28,22 +28,31 @@ function copyIconName(iconName) {
 </script>
 
 <template>
-  <div :class="`grid ${gridCols} gap-2`">
+  <div :class="`grid ${gridCols} gap-3`">
     <div
       v-for="icon in icons"
       :key="icon"
-      class="flex flex-col items-center p-2 bg-base-100 rounded hover:bg-base-300 cursor-pointer transition-all"
+      class="flex flex-col items-center p-3 bg-base-100 rounded-md hover:bg-base-300 cursor-pointer transition-all hover:shadow-md"
       @click="copyIconName(icon)"
     >
-      <div :class="`${iconSize} mb-1`">
+      <div :class="`${iconSize} mb-2 icon-container`">
         <Icon :name="`hugeicons:${icon}`" />
       </div>
       <div class="text-xs text-center opacity-70 truncate w-full">
         {{ icon }}
       </div>
-      <div v-if="selectedIcon === icon" class="badge badge-success mt-1 badge-xs">
+      <div v-if="selectedIcon === icon" class="badge badge-success mt-1 badge-sm animate-pulse">
         已复制!
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.icon-container {
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>

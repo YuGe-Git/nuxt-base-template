@@ -21,7 +21,7 @@ const emit = defineEmits(['prevPage', 'nextPage'])
         :disabled="currentPage === 1"
         @click="emit('prevPage')"
       >
-        <span class="i-hugeicons-chevron-left" />
+        <Icon name="hugeicons:arrow-left-01" />
       </button>
       <button class="join-item btn btn-sm">
         {{ currentPage }} / {{ totalPages }}
@@ -31,7 +31,7 @@ const emit = defineEmits(['prevPage', 'nextPage'])
         :disabled="currentPage === totalPages"
         @click="emit('nextPage')"
       >
-        <span class="i-hugeicons-chevron-right" />
+        <Icon name="hugeicons:arrow-right-01" />
       </button>
     </div>
   </div>
