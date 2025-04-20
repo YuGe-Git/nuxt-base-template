@@ -1,3 +1,4 @@
+import { execSync } from 'node:child_process'
 import * as nConsole from 'node:console'
 import { existsSync } from 'node:fs'
 import * as nProcess from 'node:process'
@@ -66,7 +67,22 @@ export function printSeparator(): void {
  * @param taskName 任务名称
  */
 export async function startTask(taskName: string): Promise<void> {
-  nConsole.clear()
+  // 使用适合当前操作系统的清屏方法
+  if (nProcess.platform === 'win32') {
+    // Windows系统使用CMD清屏命令
+    try {
+      execSync('cls', { stdio: 'inherit' })
+    }
+    catch {
+      // 如果执行失败，回退到传统方法
+      nConsole.clear()
+    }
+  }
+  else {
+    // 非Windows系统使用ANSI转义序列清屏（更彻底）
+    nProcess.stdout.write('\x1Bc')
+  }
+
   printSeparator()
   log.info(taskName)
   await sleep(500)

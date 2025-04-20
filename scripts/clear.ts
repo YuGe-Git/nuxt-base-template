@@ -2,6 +2,7 @@ import { execSync } from 'node:child_process'
 import { existsSync } from 'node:fs'
 import { rm } from 'node:fs/promises'
 import { join } from 'node:path'
+import * as process from 'node:process'
 import { log, printSeparator, sleep, startTask, waitUntilRemoved } from './utils'
 
 /**
@@ -86,7 +87,7 @@ async function clear() {
   }
   catch (error) {
     log.error('❌ 清理过程中出错:')
-    console.error(error)
+    log.error(String(error))
     printSeparator()
   }
 }
