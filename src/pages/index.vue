@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// 首页组件 - 使用模块化组件构建
+import BaseInfoIndex from '~/components/Base/InfoIndex.vue'
 </script>
 
 <template>
