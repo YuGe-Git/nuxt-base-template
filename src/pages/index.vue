@@ -1,11 +1,9 @@
-<script setup lang='ts'>
-
+<script setup lang="ts">
+// 首页组件 - 使用模块化组件构建
 </script>
 
 <template>
-  <div>
-    <BaseInfoIndex />
-  </div>
+  <BaseInfoIndex />
 </template>
 
 <style scoped>

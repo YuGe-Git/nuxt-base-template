@@ -5,7 +5,7 @@ const testPages = [
     title: '组件测试',
     description: 'DaisyUI组件和主题展示',
     path: '/test/daisyui',
-    icon: 'hugeicons:component-01',
+    icon: 'hugeicons:legal-document-01',
   },
   {
     title: '图标测试',
