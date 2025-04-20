@@ -11,6 +11,7 @@ export default defineNuxtConfig({
   components: [
     {
       path: '~/components',
+      // 禁用组件名称前缀，使组件导入时不需要加目录前缀（例如ui/Button→Button而不是UiButton）
       pathPrefix: false,
     },
   ],
