@@ -42,20 +42,20 @@ onMounted(() => {
       <div class="container mx-auto">
         <!-- 顶部导航区域 -->
         <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
-          <BaseUiBackToTestCenter />
+          <BackToTestCenter />
 
           <!-- 主题切换器 -->
-          <DaisyuiThemeSwitcher />
+          <ThemeSwitcher />
         </div>
 
         <!-- 标题 -->
         <div class="text-center mb-8">
           <h1 class="text-3xl sm:text-4xl font-bold mb-2 flex items-center justify-center gap-3">
             <Icon name="hugeicons:workflow-square-01" class="inline-block text-primary" />
-            <span>DaisyUI <span class="text-primary">组件测试</span></span>
+            <span> <span class="text-primary">组件测试</span></span>
           </h1>
           <p class="text-base-content/60 max-w-xl mx-auto">
-            探索DaisyUI组件库的丰富功能，测试不同主题下的组件效果和交互
+            探索组件库的丰富功能，测试不同主题下的组件效果和交互
           </p>
         </div>
 
@@ -85,18 +85,18 @@ onMounted(() => {
           <div class="card-body">
             <!-- 不同组件测试内容 -->
             <Transition name="fade" mode="out-in">
-              <DaisyuiButtonsTest v-if="activeTab === 'buttons'" />
-              <DaisyuiCardsTest v-else-if="activeTab === 'cards'" />
-              <DaisyuiFormsTest v-else-if="activeTab === 'forms'" />
-              <DaisyuiAlertsTest v-else-if="activeTab === 'alerts'" />
-              <DaisyuiModalsTest v-else-if="activeTab === 'modals'" />
+              <ButtonsTest v-if="activeTab === 'buttons'" />
+              <CardsTest v-else-if="activeTab === 'cards'" />
+              <FormsTest v-else-if="activeTab === 'forms'" />
+              <AlertsTest v-else-if="activeTab === 'alerts'" />
+              <ModalsTest v-else-if="activeTab === 'modals'" />
             </Transition>
           </div>
         </div>
 
         <!-- 页脚 -->
         <div class="mt-10 text-center text-base-content/50 text-sm">
-          <p>基于 DaisyUI v5.0.27 和 Tailwind CSS v4.1.4 构建</p>
+          <p>基于  v5.0.27 和 Tailwind CSS v4.1.4 构建</p>
           <p class="mt-1">
             适用于 Nuxt 3 的组件展示
           </p>
