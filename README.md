@@ -1,5 +1,7 @@
 # Nuxt 基础模板
 
+> **开发状态提示**：当前项目正在积极开发中，功能和文档会持续更新。如果您在使用过程中遇到任何问题或有改进建议，欢迎[提交 Issues](https://github.com/your-username/nuxt-base-template/issues)。您的反馈对我们非常宝贵！
+
 一个预配置的 Nuxt 3 应用程序模板，集成了现代化开发工具和最佳实践。
 
 ## 特性
