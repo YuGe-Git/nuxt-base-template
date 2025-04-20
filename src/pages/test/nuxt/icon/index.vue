@@ -1,11 +1,13 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { allIcons } from '~/components/base/data/hugeicons'
 
 // 搜索状态
 const searchQuery = ref('')
 const page = ref(1)
-const perPage = 80 // 增加每页显示数量以充分利用空间
+const perPage = 80 // 每页显示数量
+const isLoading = ref(false) // 加载状态
+const showTopButton = ref(false) // 显示返回顶部按钮
 
 // 根据搜索过滤图标
 const filteredIcons = computed(() => {
@@ -15,6 +17,13 @@ const filteredIcons = computed(() => {
   return allIcons.filter(icon =>
     icon.toLowerCase().includes(searchQuery.value.toLowerCase()),
   )
+})
+
+// 当搜索条件变化时，重置页码
+watch(searchQuery, () => {
+  page.value = 1
+  // 模拟加载效果
+  simulateLoading()
 })
 
 // 分页显示的图标
@@ -34,6 +43,7 @@ function prevPage() {
   if (page.value > 1) {
     page.value--
     scrollToTop()
+    simulateLoading()
   }
 }
 
@@ -41,17 +51,33 @@ function nextPage() {
   if (page.value < totalPages.value) {
     page.value++
     scrollToTop()
+    simulateLoading()
   }
 }
 
-// 切换页面时滚动到顶部
+// 返回顶部
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+// 模拟加载效果
+function simulateLoading() {
+  isLoading.value = true
+  setTimeout(() => {
+    isLoading.value = false
+  }, 300)
+}
+
+// 监听滚动事件，显示/隐藏返回顶部按钮
+if (typeof window !== 'undefined') {
+  window.addEventListener('scroll', () => {
+    showTopButton.value = window.scrollY > 300
+  })
 }
 </script>
 
 <template>
-  <div class="bg-base-100 p-4 pb-8">
+  <div class="bg-base-100 p-4 pb-8 relative">
     <div class="container mx-auto">
       <!-- 导航返回 -->
       <div class="mb-6">
@@ -118,7 +144,7 @@ function scrollToTop() {
           </div>
 
           <!-- 图标网格 -->
-          <div class="card bg-base-200 shadow-md">
+          <div class="card bg-base-200 shadow-md overflow-hidden">
             <div class="card-body p-4">
               <h2 class="card-title text-lg mb-4">
                 {{ searchQuery ? '搜索结果' : '所有图标' }}
@@ -127,18 +153,25 @@ function scrollToTop() {
                 </div>
               </h2>
 
+              <!-- 加载中状态 -->
+              <div v-if="isLoading" class="flex justify-center items-center py-20">
+                <div class="loading loading-spinner loading-lg text-primary" />
+              </div>
+
               <!-- 未找到结果提示 -->
-              <div v-if="filteredIcons.length === 0" class="alert alert-warning">
+              <div v-else-if="filteredIcons.length === 0" class="alert alert-warning">
                 <Icon name="hugeicons:information-square" />
                 <span>未找到匹配的图标，请尝试其他关键词</span>
               </div>
 
               <!-- 图标网格 -->
-              <IconGrid
-                v-if="filteredIcons.length > 0"
-                :icons="paginatedIcons"
-                icon-size="text-xl"
-              />
+              <transition name="fade-scale" mode="out-in">
+                <IconGrid
+                  v-if="filteredIcons.length > 0 && !isLoading"
+                  :icons="paginatedIcons"
+                  icon-size="text-xl"
+                />
+              </transition>
 
               <!-- 分页控制 -->
               <IconPagination
@@ -152,8 +185,54 @@ function scrollToTop() {
         </div>
       </div>
     </div>
+
+    <!-- 返回顶部按钮 -->
+    <button
+      v-show="showTopButton"
+      class="btn btn-circle btn-primary fixed bottom-4 right-4 z-50 shadow-lg back-to-top"
+      @click="scrollToTop"
+    >
+      <Icon name="hugeicons:arrow-up-01" class="text-lg" />
+    </button>
+
+    <!-- 页脚 -->
+    <div class="mt-10 text-center text-base-content/50 text-sm">
+      <p>基于 @nuxt/icon v1.12.0 构建</p>
+      <p class="mt-1">
+        使用 @iconify-json/hugeicons v1.2.4 和 @iconify/json v2.2.329
+      </p>
+      <p class="mt-1">
+        适用于 Nuxt 3 的图标展示
+      </p>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.fade-scale-enter-active,
+.fade-scale-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.fade-scale-enter-from,
+.fade-scale-leave-to {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.back-to-top {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
 </style>
