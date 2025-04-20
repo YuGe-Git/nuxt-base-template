@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 快速开始指南组件
 const codeSteps = [
-  { code: 'git clone https://github.com/yourusername/nuxt-base-template.git', desc: '从GitHub克隆代码库' },
+  { code: 'git clone https://github.com/YuGe-Git/nuxt-base-template.git', desc: '从GitHub克隆代码库' },
   { code: 'cd nuxt-base-template', desc: '进入项目目录' },
   { code: 'pnpm install', desc: '安装项目依赖' },
   { code: 'pnpm dev', desc: '启动开发服务器' },

@@ -2,7 +2,7 @@
 // 首页头部组件 - 包含项目标题和简介
 const links = [
   { name: '查看文档', icon: 'hugeicons:legal-document-01', url: '#' },
-  { name: 'GitHub', icon: 'hugeicons:github', url: 'https://github.com' },
+  { name: 'GitHub', icon: 'hugeicons:github', url: 'https://github.com/YuGe-Git/nuxt-base-template' },
   { name: '测试页面', icon: 'hugeicons:test-tube-01', url: '/test', isInternal: true },
 ]
 </script>
