@@ -2,6 +2,7 @@ import tailwindcss from '@tailwindcss/vite'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   // 兼容性日期，指定使用的 Nuxt 功能集
+  compatibilityDate: '2024-11-01',
   // 加载的 Nuxt 模块
   modules: [
     '@nuxt/eslint', // ESLint 集成
@@ -23,7 +24,21 @@ export default defineNuxtConfig({
   ],
   // 源代码目录
   srcDir: 'src/',
-  compatibilityDate: '2024-11-01',
+
+  // 添加nitro配置，修复静态生成
+  nitro: {
+    preset: 'static',
+    prerender: {
+      failOnError: false,
+      routes: [
+        '/',
+        '/test',
+        '/test/daisyui',
+        '/test/nuxt/icon',
+      ],
+    },
+  },
+
   // Vite 配置
   vite: {
     plugins: [
