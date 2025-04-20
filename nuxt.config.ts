@@ -74,7 +74,7 @@ export default defineNuxtConfig({
     mode: 'css',
     cssLayer: 'base',
     serverBundle: {
-      collections: ['Hugeicons'],
+      collections: ['hugeicons'],
     },
   },
 })
