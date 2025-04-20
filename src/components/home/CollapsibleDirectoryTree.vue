@@ -1,6 +1,6 @@
 <script setup>
 // 可折叠目录树组件
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 // 通过name属性定义组件名称，使递归引用生效
 defineOptions({
@@ -20,9 +20,34 @@ defineProps({
 
 // 跟踪每个折叠项的状态
 const openItems = ref({})
+// 客户端渲染标记，避免SSR不匹配问题
+const isClient = ref(false)
+
+// 在客户端挂载后初始化
+onMounted(() => {
+  isClient.value = true
+  // 默认展开第一级
+  if (isClient.value) {
+    initializeOpenItems()
+  }
+})
+
+// 初始化第一级目录为打开状态
+function initializeOpenItems() {
+  if (!isClient.value)
+    return
+  // 确保顶级目录始终展开
+  items.forEach((item, index) => {
+    if (level === 0 && item.children && item.children.length > 0) {
+      openItems.value[getItemKey(item, index)] = true
+    }
+  })
+}
 
 // 切换折叠状态
 function toggleItem(key, event) {
+  if (!isClient.value)
+    return
   event.stopPropagation()
   openItems.value[key] = !openItems.value[key]
 }
@@ -72,54 +97,56 @@ function getIconColorClass(item) {
 
 <template>
   <div>
-    <template v-for="(item, index) in items" :key="`dir-${level}-${index}`">
-      <!-- 目录或文件项 -->
-      <div :class="getIndentClass(level)">
-        <!-- 对于有子项的目录，使用可折叠组件 -->
-        <div
-          v-if="!item.isFile && item.children && item.children.length > 0"
-          class="collapse bg-base-100 border-base-300 rounded-md mb-2"
-          :class="[
-            { 'border': level > 0, 'border-0': level === 0 },
-            openItems[getItemKey(item, index)] ? 'collapse-open' : '',
-            level === 0 ? 'collapse-open' : 'collapse-arrow',
-          ]"
-          @click="toggleItem(getItemKey(item, index), $event)"
-        >
-          <div class="collapse-title py-2 px-3 font-mono text-sm flex items-center gap-2">
+    <ClientOnly>
+      <template v-for="(item, index) in items" :key="`dir-${level}-${index}`">
+        <!-- 目录或文件项 -->
+        <div :class="getIndentClass(level)">
+          <!-- 对于有子项的目录，使用可折叠组件 -->
+          <div
+            v-if="!item.isFile && item.children && item.children.length > 0"
+            class="collapse bg-base-100 border-base-300 rounded-md mb-2"
+            :class="[
+              { 'border': level > 0, 'border-0': level === 0 },
+              isClient && openItems[getItemKey(item, index)] ? 'collapse-open' : '',
+              level === 0 ? 'collapse-open' : 'collapse-arrow',
+            ]"
+            @click="toggleItem(getItemKey(item, index), $event)"
+          >
+            <div class="collapse-title py-2 px-3 font-mono text-sm flex items-center gap-2">
+              <Icon
+                :name="getFileIcon(item)"
+                class="w-4 h-4"
+                :class="getIconColorClass(item)"
+              />
+              <span class="font-semibold">{{ item.path }}</span>
+              <span v-if="item.description" class="text-xs opacity-60 font-normal">{{ item.description }}</span>
+            </div>
+            <div class="collapse-content pb-1 pt-0" @click.stop>
+              <!-- 递归渲染子目录 -->
+              <CollapsibleDirectoryTree
+                :items="item.children"
+                :level="level + 1"
+              />
+            </div>
+          </div>
+
+          <!-- 对于文件或无子项的目录，显示普通项 -->
+          <div
+            v-else
+            class="flex items-center py-2 px-3 mb-2 font-mono text-sm"
+            :class="{ 'bg-base-100 rounded-md': level > 0 }"
+          >
             <Icon
               :name="getFileIcon(item)"
-              class="w-4 h-4"
+              class="w-4 h-4 mr-2"
               :class="getIconColorClass(item)"
             />
-            <span class="font-semibold">{{ item.path }}</span>
-            <span v-if="item.description" class="text-xs opacity-60 font-normal">{{ item.description }}</span>
-          </div>
-          <div class="collapse-content pb-1 pt-0" @click.stop>
-            <!-- 递归渲染子目录 -->
-            <CollapsibleDirectoryTree
-              :items="item.children"
-              :level="level + 1"
-            />
+            <span :class="{ 'font-semibold': !item.isFile }">{{ item.path }}</span>
+            <span v-if="item.description" class="ml-2 text-xs opacity-60">{{ item.description }}</span>
           </div>
         </div>
-
-        <!-- 对于文件或无子项的目录，显示普通项 -->
-        <div
-          v-else
-          class="flex items-center py-2 px-3 mb-2 font-mono text-sm"
-          :class="{ 'bg-base-100 rounded-md': level > 0 }"
-        >
-          <Icon
-            :name="getFileIcon(item)"
-            class="w-4 h-4 mr-2"
-            :class="getIconColorClass(item)"
-          />
-          <span :class="{ 'font-semibold': !item.isFile }">{{ item.path }}</span>
-          <span v-if="item.description" class="ml-2 text-xs opacity-60">{{ item.description }}</span>
-        </div>
-      </div>
-    </template>
+      </template>
+    </ClientOnly>
   </div>
 </template>
 

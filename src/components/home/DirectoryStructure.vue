@@ -13,7 +13,15 @@ import { directories } from './directoryData'
       <!-- 可折叠目录结构树 -->
       <div class="bg-base-300 p-4 rounded-lg mb-6 overflow-x-auto">
         <div class="font-mono text-sm directory-tree-container">
-          <CollapsibleDirectoryTree :items="directories" />
+          <ClientOnly>
+            <CollapsibleDirectoryTree :items="directories" />
+            <template #fallback>
+              <div class="p-4 text-center text-base-content/60">
+                <div class="loading loading-spinner loading-sm inline-block mr-2" />
+                加载目录结构...
+              </div>
+            </template>
+          </ClientOnly>
         </div>
       </div>
 
