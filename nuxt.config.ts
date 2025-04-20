@@ -7,12 +7,13 @@ export default defineNuxtConfig({
     '@nuxt/eslint', // ESLint 集成
     '@nuxt/icon', // 图标支持
   ],
-  // 自动导入狗都不用
-  // components: [
-  //   {
-  //     path: '~/components',
-  //   },
-  // ],
+  // 启用组件自动导入
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+    },
+  ],
   // 启用开发工具
   devtools: { enabled: true },
   // CSS 全局文件
