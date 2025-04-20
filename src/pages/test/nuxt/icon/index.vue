@@ -153,25 +153,27 @@ if (typeof window !== 'undefined') {
                 </div>
               </h2>
 
-              <!-- 加载中状态 -->
-              <div v-if="isLoading" class="flex justify-center items-center py-20">
-                <div class="loading loading-spinner loading-lg text-primary" />
-              </div>
+              <!-- 图标内容区域 - 添加最小高度确保页面稳定 -->
+              <div class="icon-content-area">
+                <!-- 加载中状态 -->
+                <div v-if="isLoading" class="flex justify-center items-center h-[600px]">
+                  <div class="loading loading-spinner loading-lg text-primary" />
+                </div>
 
-              <!-- 未找到结果提示 -->
-              <div v-else-if="filteredIcons.length === 0" class="alert alert-warning">
-                <Icon name="hugeicons:information-square" />
-                <span>未找到匹配的图标，请尝试其他关键词</span>
-              </div>
+                <!-- 未找到结果提示 -->
+                <div v-else-if="filteredIcons.length === 0" class="alert alert-warning h-[600px] flex items-center justify-center">
+                  <Icon name="hugeicons:information-square" />
+                  <span>未找到匹配的图标，请尝试其他关键词</span>
+                </div>
 
-              <!-- 图标网格 -->
-              <transition name="fade-scale" mode="out-in">
-                <IconGrid
-                  v-if="filteredIcons.length > 0 && !isLoading"
-                  :icons="paginatedIcons"
-                  icon-size="text-xl"
-                />
-              </transition>
+                <!-- 图标网格 -->
+                <div v-else class="icon-grid-container">
+                  <IconGrid
+                    :icons="paginatedIcons"
+                    icon-size="text-xl"
+                  />
+                </div>
+              </div>
 
               <!-- 分页控制 -->
               <IconPagination
@@ -218,6 +220,39 @@ if (typeof window !== 'undefined') {
 .fade-scale-leave-to {
   opacity: 0;
   transform: scale(0.98);
+}
+
+/* 确保内容区域高度稳定 */
+.icon-content-area {
+  height: 750px; /* 固定高度而不是最小高度 */
+  position: relative;
+  overflow: hidden; /* 防止内容溢出 */
+}
+
+.icon-grid-container {
+  height: 1000px;
+  overflow-y: auto; /* 添加垂直滚动条 */
+  transition: opacity 0.3s ease-in-out;
+  padding-right: 4px; /* 为滚动条预留空间 */
+}
+
+/* 自定义滚动条样式 */
+.icon-grid-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.icon-grid-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.icon-grid-container::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.icon-grid-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .back-to-top {
