@@ -1,6 +1,6 @@
 <script setup>
+import CollapsibleDirectoryTree from './CollapsibleDirectoryTree.vue'
 import { directories } from './directoryData'
-import DirectoryTree from './DirectoryTree.vue'
 </script>
 
 <template>
@@ -10,10 +10,10 @@ import DirectoryTree from './DirectoryTree.vue'
         项目采用模块化的目录结构，遵循Nuxt 3的最佳实践，方便组织和管理大型应用。
       </p>
 
-      <!-- 目录结构树 -->
+      <!-- 可折叠目录结构树 -->
       <div class="bg-base-300 p-4 rounded-lg mb-6 overflow-x-auto">
         <div class="font-mono text-sm directory-tree-container">
-          <DirectoryTree :items="directories" />
+          <CollapsibleDirectoryTree :items="directories" />
         </div>
       </div>
 
