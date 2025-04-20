@@ -23,7 +23,7 @@
 1. Fork项目仓库
 2. 克隆您的Fork到本地
    ```bash
-   git clone https://github.com/YOUR_USERNAME/nuxt-base-template.git
+   git clone https://github.com/YuGe-Git/nuxt-base-template.git
    cd nuxt-base-template
    ```
 3. 安装依赖
@@ -56,7 +56,10 @@ pnpm lint
 
 ```bash
 pnpm lint:fix
+
 ```
+
+更多命令请参考 [scripts.md](docs/scripts.md)
 
 ### 组件开发规范
 
