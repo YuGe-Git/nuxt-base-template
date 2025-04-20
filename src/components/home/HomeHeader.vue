@@ -17,6 +17,10 @@ const links = [
     <p class="text-lg opacity-70 max-w-xl mx-auto px-4 mb-8">
       基于 Nuxt 3 的现代化开发模板，快速启动您的下一个项目
     </p>
+    <p class="text-sm opacity-50 max-w-xl mx-auto px-4 mb-6 flex items-center justify-center gap-1">
+      <Icon name="hugeicons:ai-brain-03" class="text-primary" />
+      本项目80%代码由AI提供
+    </p>
 
     <!-- 行动按钮 -->
     <div class="flex justify-center gap-4 flex-wrap mt-6">
