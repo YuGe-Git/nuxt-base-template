@@ -12,17 +12,23 @@ import DirectoryTree from './DirectoryTree.vue'
 
       <!-- 目录结构树 -->
       <div class="bg-base-300 p-4 rounded-lg mb-6 overflow-x-auto">
-        <div class="font-mono text-sm">
+        <div class="font-mono text-sm directory-tree-container">
           <DirectoryTree :items="directories" />
         </div>
       </div>
 
       <div class="alert bg-base-300 border-l-4 border-secondary">
         <div class="flex items-center gap-3">
-          <Icon name="hugeicons:information-circle" class="text-secondary" />
+          <Icon name="hugeicons:information-circle" class="text-secondary w-5 h-5" />
           <span>遵循<strong>单一职责原则</strong>，一个文件只做一件事，使代码更易于维护和测试。</span>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.directory-tree-container {
+  padding-left: 0;
+}
+</style>

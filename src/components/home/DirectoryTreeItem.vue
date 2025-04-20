@@ -16,10 +16,10 @@ defineProps({
     <div class="flex items-center">
       <Icon
         :name="isFile ? 'hugeicons:legal-document-01' : 'hugeicons:structure-folder'"
-        class="mr-1"
+        class="mr-1 w-4 h-4"
         :class="isFile ? 'text-base-content opacity-60' : 'text-primary'"
       />
-      <span :class="{ 'font-semibold': !isFile }">{{ path }}</span>
+      <span :class="{ 'font-semibold': !isFile, 'opacity-90': !isFile }">{{ path }}</span>
       <span v-if="description" class="ml-2 text-xs opacity-60">{{ description }}</span>
     </div>
   </div>

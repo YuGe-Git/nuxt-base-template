@@ -13,7 +13,7 @@ defineProps({
   },
 })
 
-// 缩进级别映射
+// 缩进级别映射 - 修改缩进逻辑
 const indentMap = {
   0: '', // 根级别无缩进
   1: 'ml-6', // 第一级
@@ -23,16 +23,20 @@ const indentMap = {
 }
 
 // 获取缩进类
-function getIndentClass(level) {
+function getIndentClass(level, path) {
+  // 特殊处理根级别的"nuxt-base-template/"
+  if (level === 0 && path === 'nuxt-base-template/') {
+    return 'root-level'
+  }
   return indentMap[level] || 'ml-24'
 }
 </script>
 
 <template>
   <div>
-    <template v-for="(item, index) in items" :key="index">
+    <template v-for="(item, index) in items" :key="`dir-${level}-${index}`">
       <!-- 当前目录项 -->
-      <div :class="getIndentClass(level)">
+      <div :id="`dir-${level}-${index}`" :class="getIndentClass(level, item.path)">
         <DirectoryTreeItem
           :path="item.path"
           :description="item.description"
@@ -57,5 +61,9 @@ function getIndentClass(level) {
 }
 .ml-24 {
   margin-left: 6rem;
+}
+.root-level {
+  margin-left: 0;
+  padding-left: 0;
 }
 </style>
