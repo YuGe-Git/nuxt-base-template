@@ -19,6 +19,14 @@ const testPages = [
     badge: '4386个图标',
     color: 'bg-gradient-to-r from-blue-500 to-cyan-500',
   },
+  {
+    title: '动画测试',
+    description: 'Motion动画示例展示',
+    path: '/test/motion',
+    icon: 'hugeicons:gif-square',
+    badge: '多种动画',
+    color: 'bg-gradient-to-r from-rose-500 to-orange-500',
+  },
 ]
 
 // 页面加载动画效果
