@@ -7,7 +7,9 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint', // ESLint 集成
     '@nuxt/icon', // 图标支持
+    'motion-v/nuxt', // Motion for Vue
   ],
+
   // 启用组件自动导入
   components: [
     {
@@ -35,6 +37,7 @@ export default defineNuxtConfig({
         '/test',
         '/test/daisyui',
         '/test/nuxt/icon',
+        '/test/motion',
       ],
     },
   },
