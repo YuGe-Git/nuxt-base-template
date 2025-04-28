@@ -1,15 +1,60 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-// 导入所有动画组件
-import BasicAnimation from '~/components/motion/BasicAnimation.vue'
-import ColorAnimation from '~/components/motion/ColorAnimation.vue'
-import GestureAnimation from '~/components/motion/GestureAnimation.vue'
-import ScrollAnimation from '~/components/motion/ScrollAnimation.vue'
-import SequenceAnimation from '~/components/motion/SequenceAnimation.vue'
-import TransformAnimation from '~/components/motion/TransformAnimation.vue'
+import type { Component } from 'vue'
+import { AnimatePresence, motion } from 'motion-v' // 手动导入
+import { computed, defineAsyncComponent, onMounted, ref } from 'vue'
+import MotionTabs from '~/components/motion/MotionTabs.vue'
 
-// 页面加载动画效果
+// 异步加载动画组件，提高初始加载性能
+const animationComponents: Record<string, Component> = {
+  basic: defineAsyncComponent(() => import('~/components/motion/BasicAnimation.vue')),
+  gesture: defineAsyncComponent(() => import('~/components/motion/GestureAnimation.vue')),
+  transform: defineAsyncComponent(() => import('~/components/motion/TransformAnimation.vue')),
+  color: defineAsyncComponent(() => import('~/components/motion/ColorAnimation.vue')),
+  sequence: defineAsyncComponent(() => import('~/components/motion/SequenceAnimation.vue')),
+  scroll: defineAsyncComponent(() => import('~/components/motion/ScrollAnimation.vue')),
+}
+
+// 页面状态
 const isLoading = ref(true)
+const activeTab = ref('basic')
+const transitionName = ref('fade') // 默认过渡动画
+
+// 动画变体定义
+const transitionVariants = computed(() => {
+  switch (transitionName.value) {
+    case 'slide-left':
+      return {
+        initial: { opacity: 0, x: 30 },
+        animate: { opacity: 1, x: 0 },
+        exit: { opacity: 0, x: -30 },
+      }
+    case 'slide-right':
+      return {
+        initial: { opacity: 0, x: -30 },
+        animate: { opacity: 1, x: 0 },
+        exit: { opacity: 0, x: 30 },
+      }
+    case 'zoom-in':
+      return {
+        initial: { opacity: 0, scale: 0.95 },
+        animate: { opacity: 1, scale: 1 },
+        exit: { opacity: 0, scale: 1.05 },
+      }
+    case 'zoom-out':
+      return {
+        initial: { opacity: 0, scale: 1.05 },
+        animate: { opacity: 1, scale: 1 },
+        exit: { opacity: 0, scale: 0.95 },
+      }
+    case 'fade':
+    default:
+      return {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+      }
+  }
+})
 
 // 模拟页面加载
 onMounted(() => {
@@ -17,6 +62,9 @@ onMounted(() => {
     isLoading.value = false
   }, 300)
 })
+
+// 获取当前激活的组件
+const ActiveComponent = computed(() => animationComponents[activeTab.value])
 </script>
 
 <template>
@@ -46,29 +94,33 @@ onMounted(() => {
               Motion动画示例
             </h1>
             <p class="text-base-content/70 max-w-xl mx-auto">
-              多种CSS和JavaScript动画效果展示
+              探索CSS和JavaScript驱动的各种动画效果 (motion-v)
             </p>
             <div class="divider max-w-md mx-auto" />
           </div>
 
-          <div class="space-y-16">
-            <!-- 基础动画 -->
-            <BasicAnimation />
+          <!-- 选项卡导航和动画选择 -->
+          <MotionTabs
+            v-model:active-tab="activeTab"
+            v-model:transition-name="transitionName"
+          />
 
-            <!-- 手势动画 -->
-            <GestureAnimation />
-
-            <!-- 变形动画 -->
-            <TransformAnimation />
-
-            <!-- 颜色动画 -->
-            <ColorAnimation />
-
-            <!-- 序列动画 -->
-            <SequenceAnimation />
-
-            <!-- 滚动动画 (放在最后，以便有足够的滚动空间) -->
-            <ScrollAnimation />
+          <!-- 选项卡内容区域 -->
+          <div class="card bg-base-200 shadow-xl border border-base-300 transition-all duration-300 min-h-[300px] overflow-hidden">
+            <div class="card-body">
+              <AnimatePresence>
+                <motion.div
+                  :key="activeTab"
+                  :initial="transitionVariants.initial"
+                  :animate="transitionVariants.animate"
+                  :exit="transitionVariants.exit"
+                  :transition="{ duration: 0.3, ease: 'easeInOut' }"
+                  class="w-full"
+                >
+                  <component :is="ActiveComponent" />
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
 
           <!-- 页脚 -->
@@ -79,10 +131,14 @@ onMounted(() => {
           <!-- 页面状态 -->
           <PageStatus
             page-path="/test/motion"
-            last-edited="2025-04-28 12:35:00"
+            last-edited="2025-04-28 13:10:00"
           />
         </div>
       </div>
     </FadeInContent>
   </div>
 </template>
+
+<style scoped>
+/* 这里可以保留一些页面特有的样式，但移除之前的 transition 相关类 */
+</style>
