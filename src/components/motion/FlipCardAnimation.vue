@@ -35,7 +35,7 @@ const cards = [
     frontTitle: '响应式设计',
     frontDesc: '适配各种屏幕尺寸',
     frontColor: 'bg-gradient-to-r from-pink-500 to-rose-500',
-    frontIcon: 'hugeicons:mobile-phone-landscape',
+    frontIcon: 'hugeicons:smart-phone-01',
     backTitle: '使用方法',
     backDesc: '只需点击卡片即可触发3D旋转效果，再次点击返回正面',
     backColor: 'bg-gradient-to-r from-rose-500 to-pink-500',
