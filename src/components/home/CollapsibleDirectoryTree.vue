@@ -7,7 +7,7 @@ defineOptions({
   name: 'CollapsibleDirectoryTree',
 })
 
-defineProps({
+const props = defineProps({
   items: {
     type: Array,
     default: () => [],
@@ -37,8 +37,8 @@ function initializeOpenItems() {
   if (!isClient.value)
     return
   // 确保顶级目录始终展开
-  items.forEach((item, index) => {
-    if (level === 0 && item.children && item.children.length > 0) {
+  props.items.forEach((item, index) => {
+    if (props.level === 0 && item.children && item.children.length > 0) {
       openItems.value[getItemKey(item, index)] = true
     }
   })
@@ -70,11 +70,11 @@ function getFileIcon(item) {
     if (item.path.endsWith('.vue'))
       return 'hugeicons:code'
     if (item.path.endsWith('.ts') || item.path.endsWith('.js'))
-      return 'hugeicons:javascript-language'
+      return 'hugeicons:source-code'
     if (item.path.endsWith('.md'))
       return 'hugeicons:legal-document-01'
     if (item.path.endsWith('.json'))
-      return 'hugeicons:brackets-curly'
+      return 'hugeicons:code-square'
     return 'hugeicons:document-01'
   }
   return 'hugeicons:structure-folder'
