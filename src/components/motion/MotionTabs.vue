@@ -3,10 +3,15 @@ import type { Component } from 'vue'
 import { defineEmits, defineProps } from 'vue'
 import BasicAnimation from '~/components/motion/BasicAnimation.vue'
 import ColorAnimation from '~/components/motion/ColorAnimation.vue'
+import DragAnimation from '~/components/motion/DragAnimation.vue'
 import GestureAnimation from '~/components/motion/GestureAnimation.vue'
+import LayoutAnimation from '~/components/motion/LayoutAnimation.vue'
+import ParallaxAnimation from '~/components/motion/ParallaxAnimation.vue'
 import ScrollAnimation from '~/components/motion/ScrollAnimation.vue'
+import ScrollLinkAnimation from '~/components/motion/ScrollLinkAnimation.vue'
 import SequenceAnimation from '~/components/motion/SequenceAnimation.vue'
 import TransformAnimation from '~/components/motion/TransformAnimation.vue'
+import VariantsAnimation from '~/components/motion/VariantsAnimation.vue'
 
 interface Tab {
   id: string
@@ -39,7 +44,12 @@ const tabs: Tab[] = [
   { id: 'transform', label: '变形动画', icon: 'hugeicons:square-rotation', description: '旋转、缩放、弹跳等常见的变形动画', component: TransformAnimation },
   { id: 'color', label: '颜色动画', icon: 'hugeicons:color-palette', description: '背景渐变和文字颜色过渡效果', component: ColorAnimation },
   { id: 'sequence', label: '序列动画', icon: 'hugeicons:slider-02', description: '按预定顺序逐步播放的动画效果', component: SequenceAnimation },
+  { id: 'variants', label: '变体动画', icon: 'hugeicons:workflow-02', description: '使用预设的命名变体控制动画状态切换', component: VariantsAnimation },
   { id: 'scroll', label: '滚动动画', icon: 'hugeicons:scroll', description: '元素进入视口时触发的动画效果', component: ScrollAnimation },
+  { id: 'scrollLink', label: '滚动链接', icon: 'hugeicons:link-02', description: '与页面滚动位置直接关联的动画效果', component: ScrollLinkAnimation },
+  { id: 'drag', label: '拖拽动画', icon: 'hugeicons:arrows-out', description: '可拖拽元素的交互动画效果', component: DragAnimation },
+  { id: 'layout', label: '布局动画', icon: 'hugeicons:grid-01', description: '列表和网格布局变化时的过渡动画', component: LayoutAnimation },
+  { id: 'parallax', label: '视差效果', icon: 'hugeicons:layers-02', description: '创建深度感和沉浸式滚动体验的动画', component: ParallaxAnimation },
 ]
 
 // 可选的过渡动画

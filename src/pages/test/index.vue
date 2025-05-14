@@ -23,7 +23,7 @@ const testPages = [
     title: '动画测试',
     description: 'Motion动画示例展示',
     path: '/test/motion',
-    icon: 'hugeicons:gif-square',
+    icon: 'hugeicons:gif-01',
     badge: '多种动画',
     color: 'bg-gradient-to-r from-rose-500 to-orange-500',
   },
@@ -33,11 +33,13 @@ const testPages = [
 const isLoading = ref(true)
 const hoveredCard = ref('')
 
+// 确保立即设置加载状态
+isLoading.value = false
+
 // 模拟页面加载
 onMounted(() => {
-  setTimeout(() => {
-    isLoading.value = false
-  }, 300)
+  // 立即设置为非加载状态，而不是使用定时器
+  isLoading.value = false
 })
 
 function setHoveredCard(path: string) {
