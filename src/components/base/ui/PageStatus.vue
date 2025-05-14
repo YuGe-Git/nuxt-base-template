@@ -35,7 +35,7 @@ defineProps({
 
       <!-- 编辑时间信息 -->
       <div class="edit-time flex items-center">
-        <Icon name="hugeicons:edit-04" class="w-3 h-3 mr-1 opacity-70" />
+        <Icon name="hugeicons:edit-01" class="w-3 h-3 mr-1 opacity-70" />
         <span>最后更新: {{ lastEdited }}</span>
       </div>
     </div>
@@ -47,7 +47,7 @@ defineProps({
         target="_blank"
         class="text-primary hover:underline flex items-center justify-end"
       >
-        <Icon name="hugeicons:message-circle-02" class="w-3 h-3 mr-1" />
+        <Icon name="hugeicons:message-01" class="w-3 h-3 mr-1" />
         <span>反馈问题或建议</span>
       </a>
     </div>
