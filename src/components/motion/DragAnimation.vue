@@ -62,49 +62,33 @@ function onDrag(event: any) {
         </div>
       </div>
 
-      <!-- 可拖拽卡片 -->
-      <motion
+      <!-- 拖拽卡片 -->
+      <div 
+        v-motion
         :drag="true"
-        :drag-constraints="{ top: -100, left: -200, right: 200, bottom: 100 }"
-        :while-hover="{ scale: 1.05 }"
-        :while-drag="{ scale: 1.05, zIndex: 50 }"
-        :transition="{ type: 'spring', stiffness: 300, damping: 20 }"
-        class="card w-72 h-80 bg-primary text-primary-content cursor-grab shadow-lg"
-        :style="{
-          rotate: `${cardRotate}deg`,
-          boxShadow: cardShadow,
-        }"
+        :drag-momentum="false"
         @dragstart="onDragStart"
         @drag="onDrag"
         @dragend="onDragEnd"
+        :animate="{ rotate: cardRotate }"
+        :style="{ boxShadow: cardShadow }"
+        class="bg-white p-6 rounded-lg shadow-md w-64 h-48 flex items-center justify-center text-center cursor-move border border-gray-200"
       >
-        <div class="card-body flex flex-col justify-between">
-          <div>
-            <h2 class="card-title">
-              拖拽我！
-            </h2>
-            <p>这是一个简单的拖拽演示</p>
-          </div>
-
-          <div class="mt-auto">
-            <p class="text-sm opacity-80">
-              当前状态: {{ isDragging ? '拖拽中' : '静止' }}<br>
-              鼠标位置:<br>
-              X: {{ Math.round(position.x) }}px<br>
-              Y: {{ Math.round(position.y) }}px
-            </p>
-
-            <div class="card-actions justify-end mt-4">
-              <div class="badge badge-outline">
-                基础演示
-              </div>
-              <div class="badge badge-outline">
-                拖拽效果
-              </div>
-            </div>
+        <div class="space-y-2">
+          <h3 class="text-xl font-semibold">可拖拽卡片</h3>
+          <p class="text-sm text-gray-500">拖拽我来感受动画效果</p>
+          <div v-if="isDragging" class="text-xs text-blue-500 mt-2">
+            位置: X:{{ Math.round(position.x) }}, Y:{{ Math.round(position.y) }}
           </div>
         </div>
-      </motion>
+      </div>
+    </div>
+
+    <!-- 拖拽状态信息 -->
+    <div v-if="isDragging" class="mt-8 p-4 bg-blue-50 rounded-lg">
+      <div class="text-center text-blue-600 font-medium">
+        当前正在拖拽
+      </div>
     </div>
   </div>
 </template>

@@ -38,6 +38,10 @@ const items = [
   '支持子元素动画的编排和统一控制',
   '可以创建复杂的联动动画效果',
 ]
+
+defineOptions({
+  ssr: false, // 禁用服务器端渲染
+})
 </script>
 
 <template>
@@ -75,25 +79,15 @@ const items = [
         变体动画特性
       </h3>
 
-      <!-- 子项目列表，会从父元素继承变体状态 -->
-      <ul v-motion class="space-y-3">
+      <!-- 项目列表 -->
+      <ul class="space-y-3">
         <li
           v-for="(item, index) in items"
           :key="index"
           v-motion
-          class="flex items-center p-3 bg-base-300 rounded"
           :variants="itemVariants"
-          :custom="index"
-          whileHover="hover"
-          whileTap="tap"
+          class="p-2 bg-base-100 rounded"
         >
-          <div
-            v-motion
-            class="w-2 h-2 bg-primary rounded-full mr-3"
-            :initial="{ scale: 0 }"
-            :animate="{ scale: 1 }"
-            :transition="{ delay: index * 0.2 }"
-          />
           {{ item }}
         </li>
       </ul>

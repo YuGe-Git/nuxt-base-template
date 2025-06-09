@@ -26,7 +26,8 @@ function toggleVisibility() {
     </button>
 
     <div v-if="isVisible" class="h-64 w-64 flex items-center justify-center">
-      <motion
+      <div
+        v-motion
         :initial="{ opacity: 0, scale: 0.8 }"
         :animate="{ opacity: 1, scale: 1 }"
         :exit="{ opacity: 0, scale: 0.8 }"
@@ -36,7 +37,7 @@ function toggleVisibility() {
         <p class="text-xl font-medium">
           我出现了！
         </p>
-      </motion>
+      </div>
     </div>
   </section>
 </template>

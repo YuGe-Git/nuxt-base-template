@@ -82,7 +82,8 @@ function endDrag() {
       <div class="w-full h-[60vh] bg-gradient-to-r from-gray-100 to-gray-200 rounded-lg relative overflow-hidden">
         <!-- 3D卡片 -->
         <div class="absolute left-1/2 top-1/4 transform -translate-x-1/2 -translate-y-1/2 perspective-1000 w-64 h-80">
-          <motion
+          <div
+            v-motion
             :initial="{ rotateX: 0, rotateY: 0, scale: 1 }"
             :style="{
               rotateX: `${cardRotateX}deg`,
@@ -101,13 +102,14 @@ function endDrag() {
                 </div>
               </div>
             </div>
-          </motion>
+          </div>
         </div>
 
         <!-- 跟踪点效果 -->
-        <motion
+        <div
           v-for="(point, i) in trailPoints"
           :key="point.id"
+          v-motion
           :initial="{ opacity: 1, scale: 1 }"
           :animate="{ opacity: 1 - (i * 0.1), scale: 1 - (i * 0.05) }"
           :transition="{ duration: 0.5 }"
@@ -120,10 +122,11 @@ function endDrag() {
             transform: 'translate(-50%, -50%)',
             zIndex: maxTrailPoints - i,
           }"
-        />
+        ></div>
 
         <!-- 中心拖拽元素 -->
-        <motion
+        <div
+          v-motion
           :drag="true"
           :drag-momentum="false"
           :while-hover="{ scale: 1.2 }"
@@ -135,7 +138,7 @@ function endDrag() {
           @dragend="endDrag"
         >
           拖我
-        </motion>
+        </div>
 
         <!-- 自由拖拽区块 -->
         <div class="absolute bottom-8 right-8 space-y-4">
@@ -143,9 +146,10 @@ function endDrag() {
             可拖动区块：
           </div>
           <div class="flex flex-wrap gap-4">
-            <motion
+            <div
               v-for="block in blocks"
               :key="block.id"
+              v-motion
               :drag="true"
               :drag-momentum="false"
               :while-hover="{ scale: 1.1 }"
@@ -154,7 +158,7 @@ function endDrag() {
               :class="[block.color]"
             >
               {{ block.id }}
-            </motion>
+            </div>
           </div>
         </div>
       </div>
