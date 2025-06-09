@@ -91,6 +91,15 @@ pnpm start -- --force
 
 ## 可用命令
 
+> **注意**：使用以下自定义命令前，请先全局安装 tsx：
+> ```bash
+> npm install -g tsx
+> # 或使用 yarn
+> yarn global add tsx
+> # 或使用 pnpm
+> pnpm add -g tsx
+> ```
+
 | 命令 | 描述 |
 | ---- | ---- |
 | `pnpm dev` | 启动开发服务器 |
